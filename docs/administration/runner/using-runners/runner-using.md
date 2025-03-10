@@ -20,6 +20,8 @@ When a Project is configured to use **Manual** for the [**Project Dispatch Confi
 When **Manual** is selected, only a single Runner will be utilized for a given Job execution. This can be prohibitive when attempting to target multiple environments where those environments can only be accessed by using a Runner deployed in each environment.
 :::
 
+
+
 #### Creating jobs with Manual Runner Selection
 
 When the **Manual** is selected within the **Project Dispatch Configuration**, the Job edit menu will display a “Nodes & Runners” tab where Node and Runner selection is configured for the job. When creating a job or editing a job, Runners can be selected based on tags with the following options:
@@ -41,6 +43,14 @@ The “Runnerset Can be Changed at Runtime” option controls if the Runnerset s
 A user can change which Runner will execute the job with the “Change the Target Runner”. This option is useful if you want to target different environments with the same job, for example running the same job in Dev or Staging environments that are setup with different Runners.
 This is possible only If the “Runnerset Can be Changed at Runtime” option was picked for this Job definition. If you check “Change the Target Runner” the same Runner selection UI as in the “Editing Job” will let you pick the Runner set.<br>
 ![Run job and pick a runner](/assets/img/runner-use-run-changeatruntime.png)
+
+:::warning Local Node Source Requirement
+Nodes that represent Runners are dependent on the **Local** Node Source to be configured.  Removing the Local Node Source will result in the removal of the Runner nodes from the inventory.
+
+![Local node source](/assets/img/local-node-source.png)<br>
+
+To still use the Local Node Source, but prevent the execution of commands and scripts on the Runbook Automation cluster members, set the JVM system property **`rundeck.localExecutor.disabled=true`** or **`DISABLED_LOCAL_EXECUTOR=true`** for Docker installations.
+:::
 
 #### Dispatching to Nodes with Manual Runner Selection
 
